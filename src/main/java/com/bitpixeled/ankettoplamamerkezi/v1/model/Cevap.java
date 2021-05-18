@@ -14,9 +14,12 @@ public class Cevap {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String answer;
-    private Long anketId;
-    private Long soruId;
-    private Long katilimciId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Anket anket;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Soru soru;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Katilimci katilimci;
 
 }

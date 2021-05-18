@@ -3,10 +3,9 @@ package com.bitpixeled.ankettoplamamerkezi.v1.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,6 +16,23 @@ public class Anket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String anketAdi;
-//    @ElementCollection()
-//    private List<Long> sorular;
+    @OneToMany(
+            mappedBy = "anket",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Soru> sorular = new ArrayList<>();
+
+    public Anket(String name) {
+        this.anketAdi = name;
+    }
+
+    public void addSoru(Soru soru) {
+        sorular.add(soru);
+        soru.setAnket(this);
+    }
+
+    public void removeSoru(Soru soru) {
+        sorular.remove(soru);
+        soru.setAnket(null);
+    }
 }
