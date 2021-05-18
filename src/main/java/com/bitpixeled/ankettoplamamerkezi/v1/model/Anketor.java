@@ -16,6 +16,6 @@ public class Anketor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String adi;
-    private String soyAdi;
+    private String name;
+    private String lastName;
 }

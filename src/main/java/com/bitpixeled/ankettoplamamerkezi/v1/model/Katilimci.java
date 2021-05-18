@@ -20,8 +20,8 @@ public class Katilimci {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String adi;
-    private String soyAdi;
-    private Cinsiyet cinsiyet;
-    private LocalDate dogumTarihi;
+    private String name;
+    private String lastName;
+    private Gender gender;
+    private LocalDate birthDate;
 }
