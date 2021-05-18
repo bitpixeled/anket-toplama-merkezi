@@ -7,15 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-public class Anketor {
+public class Anket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String adi;
-    private String soyAdi;
+    private String anketAdi;
+    private List<Long> sorular;
 }
