@@ -1,7 +1,6 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.service;
 
 import com.bitpixeled.ankettoplamamerkezi.v1.dto.AnketDto;
-import com.bitpixeled.ankettoplamamerkezi.v1.dto.SoruDto;
 import com.bitpixeled.ankettoplamamerkezi.v1.exception.RecordNotFound;
 import com.bitpixeled.ankettoplamamerkezi.v1.model.Anket;
 import com.bitpixeled.ankettoplamamerkezi.v1.model.Soru;
@@ -9,9 +8,11 @@ import com.bitpixeled.ankettoplamamerkezi.v1.repository.AnketRepo;
 import com.bitpixeled.ankettoplamamerkezi.v1.repository.SoruRepo;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class AnketService {
 
     private final AnketRepo anketRepo;

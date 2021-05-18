@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class AppExceptionHandler {
+public class AppControllerAdvice {
 
     @ExceptionHandler(value = RecordNotFound.class)
     public String handleRecordNotFound(RecordNotFound ex){
