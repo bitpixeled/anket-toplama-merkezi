@@ -42,7 +42,7 @@ public class AnketService {
     }
 
     public Anket createWithDto (AnketDto anketDto){
-        Anket anket = anketRepo.save(new Anket(anketDto.getName()));
+        Anket anket = anketRepo.save(new Anket(anketDto.getAnketName()));
         List<String> sorular = anketDto.getSorular();
         for (String s : sorular) {
             Soru save = soruRepo.save(new Soru(s));

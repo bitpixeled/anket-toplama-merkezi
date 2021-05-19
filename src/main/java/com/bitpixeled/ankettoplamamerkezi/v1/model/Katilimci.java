@@ -19,7 +19,6 @@ public class Katilimci {
     private Long id;
     private String name;
     private String lastName;
-
     @Enumerated
     @Column(columnDefinition = "smallint")
     private Gender gender;

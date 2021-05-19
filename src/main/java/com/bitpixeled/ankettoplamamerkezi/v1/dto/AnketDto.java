@@ -7,7 +7,14 @@ import java.util.List;
 @Data
 public class AnketDto {
 
-    private String name;
+    private String anketName;
     private List<String> sorular;
 
+    public AnketDto() {
+    }
+
+    public AnketDto(String anketName, List<String> sorular) {
+        this.anketName = anketName;
+        this.sorular = sorular;
+    }
 }

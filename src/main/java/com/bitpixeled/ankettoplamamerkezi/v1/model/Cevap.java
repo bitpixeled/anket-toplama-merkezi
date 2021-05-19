@@ -13,7 +13,7 @@ public class Cevap {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String answer;
+    private String cevap;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Anket anket;
