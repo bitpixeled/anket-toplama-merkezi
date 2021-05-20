@@ -13,9 +13,9 @@ import java.util.List;
 public class Anket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String anketAdi;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long anketId;
+    private String anketName;
     @OneToMany(
             mappedBy = "anket",
             cascade = CascadeType.ALL,
@@ -23,7 +23,7 @@ public class Anket {
     private List<Soru> sorular = new ArrayList<>();
 
     public Anket(String name) {
-        this.anketAdi = name;
+        this.anketName = name;
     }
 
     public void addSoru(Soru soru) {

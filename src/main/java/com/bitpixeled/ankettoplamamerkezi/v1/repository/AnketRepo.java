@@ -1,9 +1,9 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.repository;
 
 import com.bitpixeled.ankettoplamamerkezi.v1.model.Anket;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AnketRepo extends CrudRepository<Anket, Long> {
+public interface AnketRepo extends JpaRepository<Anket, Long> {
 }

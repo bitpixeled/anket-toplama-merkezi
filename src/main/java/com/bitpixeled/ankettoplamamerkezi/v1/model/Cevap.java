@@ -11,8 +11,8 @@ import javax.persistence.*;
 public class Cevap {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cevapId;
     private String cevap;
 
     @ManyToOne(fetch = FetchType.LAZY)

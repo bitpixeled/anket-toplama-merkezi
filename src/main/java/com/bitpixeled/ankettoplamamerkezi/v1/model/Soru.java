@@ -13,8 +13,8 @@ import javax.persistence.*;
 public class Soru {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long soruId;
     private String soruAdi;
 
     @JsonIgnore

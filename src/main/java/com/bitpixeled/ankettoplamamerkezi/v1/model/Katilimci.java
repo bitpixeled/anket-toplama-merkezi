@@ -15,8 +15,8 @@ import java.time.LocalDate;
 public class Katilimci {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long katilimciId;
     private String name;
     private String lastName;
     @Enumerated

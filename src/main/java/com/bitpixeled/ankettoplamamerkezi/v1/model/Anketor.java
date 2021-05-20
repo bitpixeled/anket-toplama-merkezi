@@ -14,8 +14,8 @@ import javax.persistence.Id;
 public class Anketor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long anketorId;
     private String name;
     private String lastName;
 }

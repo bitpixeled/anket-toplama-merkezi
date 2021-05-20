@@ -23,6 +23,10 @@ public class AnketService {
         this.soruRepo = soruRepo;
     }
 
+    public List<Anket> findAll (){
+        return anketRepo.findAll();
+    }
+
     public Anket addAnket (Anket anket){
         return anketRepo.save(anket);
     }
@@ -33,7 +37,7 @@ public class AnketService {
 
     public Anket updateAnketById(Long id, Anket anket){
         Anket record = anketRepo.findById(id).orElseThrow(RecordNotFound::new);
-        record.setAnketAdi(anket.getAnketAdi());
+        record.setAnketName(anket.getAnketName());
         return anketRepo.save(record);
     }
 

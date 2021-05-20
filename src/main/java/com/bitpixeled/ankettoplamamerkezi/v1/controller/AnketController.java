@@ -6,6 +6,8 @@ import com.bitpixeled.ankettoplamamerkezi.v1.service.AnketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/anketler")
 public class AnketController {
@@ -14,6 +16,11 @@ public class AnketController {
 
     public AnketController(AnketService anketService) {
         this.anketService = anketService;
+    }
+
+    @GetMapping
+    public List<Anket> findAll(){
+        return anketService.findAll();
     }
 
     @PostMapping
