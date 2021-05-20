@@ -22,14 +22,6 @@ public class Soru {
     @JoinColumn(name = "anket", referencedColumnName = "anketId")
     private Anket anket;
 
-    public Soru(String soru) {
-        this.soru = soru;
-    }
-
-
-    public Soru(SoruDto soruDto) {
-        this.soru = soruDto.getSoru();
-    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.service;
 
+import com.bitpixeled.ankettoplamamerkezi.v1.converter.AnketConverter;
 import com.bitpixeled.ankettoplamamerkezi.v1.dto.AnketDto;
 import com.bitpixeled.ankettoplamamerkezi.v1.exception.RecordNotFound;
 import com.bitpixeled.ankettoplamamerkezi.v1.model.Anket;
@@ -17,31 +18,31 @@ import java.util.stream.Collectors;
 public class AnketService {
 
     private final AnketRepo anketRepo;
-    private final SoruRepo soruRepo;
+    private final AnketConverter anketConverter;
 
-    public AnketService(AnketRepo anketRepo, SoruRepo soruRepo) {
+    public AnketService(AnketRepo anketRepo, AnketConverter anketConverter) {
         this.anketRepo = anketRepo;
-        this.soruRepo = soruRepo;
+
+        this.anketConverter = anketConverter;
     }
 
     public List<AnketDto> findAll (){
-        return anketRepo.findAll().stream().map(AnketDto::new).collect(Collectors.toList());
+        return anketConverter.createFromEntities(anketRepo.findAll());
     }
 
     public AnketDto addAnket(AnketDto anketDto){
-        Anket anket = anketRepo.save(anketDto.toEntity(anketDto));
-        return anket.toDto(anket);
+        return anketConverter.fromEntity(anketRepo.save(anketConverter.fromDto(anketDto)));
     }
 
     public AnketDto findAnketById (Long id){
-        Anket anket = anketRepo.findById(id).orElseThrow(RecordNotFound::new);
-        return anket.toDto(anket);
+        return anketRepo.findById(id)
+                .map(anketConverter::fromEntity)
+                .orElseThrow(RecordNotFound::new);
     }
 
     public AnketDto updateAnketById(Long id, AnketDto anketDto){
         Anket anket = anketRepo.findById(id).orElseThrow(RecordNotFound::new);
-        anketRepo.save(anket);
-        return anket.toDto(anket);
+        return anketConverter.fromEntity(anketRepo.save(anketConverter.fromDto(anketDto)));
     }
 
     public void deleteAnketById(Long id){
