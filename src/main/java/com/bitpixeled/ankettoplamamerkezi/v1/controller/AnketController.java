@@ -19,25 +19,25 @@ public class AnketController {
     }
 
     @GetMapping
-    public List<Anket> findAll(){
+    public List<AnketDto> findAll(){
         return anketService.findAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Anket addAnket (@RequestBody Anket anket){
+    public AnketDto addAnket (@RequestBody AnketDto anket){
        return anketService.addAnket(anket);
     }
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Anket findAnketById (@PathVariable Long id){
+    public AnketDto findAnketById (@PathVariable Long id){
         return anketService.findAnketById(id);
     }
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Anket updateAnketById(@PathVariable Long id, @RequestBody Anket anket){
+    public AnketDto updateAnketById(@PathVariable Long id, @RequestBody AnketDto anket){
         return anketService.updateAnketById(id, anket);
     }
 
@@ -47,9 +47,9 @@ public class AnketController {
         anketService.deleteAnketById(id);
     }
 
-    @PostMapping(value = "/full")
-    public Anket createWithDto(@RequestBody AnketDto anketDto){
-        return anketService.createWithDto(anketDto);
-    }
+//    @PostMapping(value = "/full")
+//    public Anket createWithDto(@RequestBody AnketDto anketDto){
+//        return anketService.createWithDto(anketDto);
+//    }
 
 }

@@ -1,7 +1,7 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.model;
 
+import com.bitpixeled.ankettoplamamerkezi.v1.dto.SoruDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,19 +15,21 @@ public class Soru {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long soruId;
-    private String soruAdi;
+    private String soru;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "anket", referencedColumnName = "anketId")
     private Anket anket;
 
     public Soru(String soru) {
-        this.soruAdi = soru;
+        this.soru = soru;
     }
 
 
-    public Soru(String soru, Anket anket) {
-        this.soruAdi = soru;
-        this.anket = anket;
+    public Soru(SoruDto soruDto) {
+        this.soru = soruDto.getSoru();
     }
+
+
 }

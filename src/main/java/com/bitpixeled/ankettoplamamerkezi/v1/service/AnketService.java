@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -23,35 +24,37 @@ public class AnketService {
         this.soruRepo = soruRepo;
     }
 
-    public List<Anket> findAll (){
-        return anketRepo.findAll();
+    public List<AnketDto> findAll (){
+        return anketRepo.findAll().stream().map(AnketDto::new).collect(Collectors.toList());
     }
 
-    public Anket addAnket (Anket anket){
-        return anketRepo.save(anket);
+    public AnketDto addAnket(AnketDto anketDto){
+        Anket anket = anketRepo.save(anketDto.toEntity(anketDto));
+        return anket.toDto(anket);
     }
 
-    public Anket findAnketById (Long id){
-        return anketRepo.findById(id).orElseThrow(RecordNotFound::new);
+    public AnketDto findAnketById (Long id){
+        Anket anket = anketRepo.findById(id).orElseThrow(RecordNotFound::new);
+        return anket.toDto(anket);
     }
 
-    public Anket updateAnketById(Long id, Anket anket){
-        Anket record = anketRepo.findById(id).orElseThrow(RecordNotFound::new);
-        record.setAnketName(anket.getAnketName());
-        return anketRepo.save(record);
+    public AnketDto updateAnketById(Long id, AnketDto anketDto){
+        Anket anket = anketRepo.findById(id).orElseThrow(RecordNotFound::new);
+        anketRepo.save(anket);
+        return anket.toDto(anket);
     }
 
     public void deleteAnketById(Long id){
         anketRepo.deleteById(id);
     }
 
-    public Anket createWithDto (AnketDto anketDto){
-        Anket anket = anketRepo.save(new Anket(anketDto.getAnketName()));
-        List<String> sorular = anketDto.getSorular();
-        for (String s : sorular) {
-            Soru save = soruRepo.save(new Soru(s));
-            anket.addSoru(save);
-        }
-        return anket;
-    }
+//    public Anket createWithDto (AnketDto anketDto){
+//        Anket anket = anketRepo.save(new Anket(anketDto.getAnketName()));
+//        List<String> sorular = anketDto.getSorular();
+//        for (String s : sorular) {
+//            Soru save = soruRepo.save(new Soru(s));
+//            anket.addSoru(save);
+//        }
+//        return anket;
+//    }
 }

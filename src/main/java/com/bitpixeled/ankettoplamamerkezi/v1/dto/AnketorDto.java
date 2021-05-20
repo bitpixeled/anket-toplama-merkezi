@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AnketorDto {
 
+
     private String name;
     private String lastName;
 
