@@ -37,7 +37,6 @@ public class SoruService {
 
     public SoruDto updateSoruById(Long id, SoruDto soru) {
         Soru entity = soruConverter.fromDto(findSoruById(id));
-        //TODO - modifying generated Id could cause a problem
         return soruConverter.fromEntity(soruRepo.save(soruConverter.updateEntity(entity, soru)));
     }
 

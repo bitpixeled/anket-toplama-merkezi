@@ -16,6 +16,7 @@ public class AnketConverter implements GenericConverter <Anket, AnketDto>{
     @Override
     public Anket fromDto(AnketDto dto) {
         Anket entity = new Anket();
+        entity.setId(dto.getId());
         entity.setAnketName(dto.getAnketName());
         entity.setSorular(soruConverter.createFromDtos(dto.getSorular()));
         return entity;

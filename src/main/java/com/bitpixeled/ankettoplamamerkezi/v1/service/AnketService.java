@@ -46,7 +46,7 @@ public class AnketService {
     }
 
     public AnketDto updateAnketById(Long id, AnketDto anketDto){
-        Anket anket = anketRepo.findById(id).orElseThrow(RecordNotFound::new);
+        Anket anket = anketConverter.fromDto(findAnketById(id));
         return anketConverter.fromEntity(anketRepo.save(anketConverter.updateEntity(anket, anketDto)));
     }
 

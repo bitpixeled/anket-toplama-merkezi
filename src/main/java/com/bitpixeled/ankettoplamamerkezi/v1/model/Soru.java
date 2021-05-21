@@ -26,16 +26,4 @@ public class Soru {
     @JoinColumn(name = "AnketId", referencedColumnName = "Id")
     private Anket anket;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Soru soru = (Soru) o;
-        return Id.equals(soru.Id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(Id);
-    }
 }

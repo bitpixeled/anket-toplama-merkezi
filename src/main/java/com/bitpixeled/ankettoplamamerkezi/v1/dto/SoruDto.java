@@ -10,5 +10,6 @@ public class SoruDto {
     private Long Id;
     private String soru;
     private boolean isNumericAnswerExpected;
+    private Long anketId;
 
 }
