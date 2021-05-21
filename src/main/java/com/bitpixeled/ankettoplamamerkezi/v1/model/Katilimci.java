@@ -14,7 +14,7 @@ public class Katilimci {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long katilimciId;
+    private Long Id;
     private String name;
     private String lastName;
     @Enumerated

@@ -17,7 +17,7 @@ public class Anketor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long anketorId;
+    private Long Id;
     private String name;
     private String lastName;
 }

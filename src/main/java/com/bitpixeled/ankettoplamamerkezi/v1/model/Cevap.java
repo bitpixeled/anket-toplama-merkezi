@@ -12,13 +12,13 @@ public class Cevap {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cevapId;
+    private Long Id;
     private String cevap;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Anket anket;
-    @ManyToOne(fetch = FetchType.LAZY)
     private Soru soru;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Anket anket;
     @ManyToOne(fetch = FetchType.LAZY)
     private Katilimci katilimci;
 

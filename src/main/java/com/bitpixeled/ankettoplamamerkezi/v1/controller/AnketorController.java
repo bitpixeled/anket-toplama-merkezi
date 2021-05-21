@@ -1,46 +1,48 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.controller;
 
-import com.bitpixeled.ankettoplamamerkezi.v1.exception.RecordNotFound;
-import com.bitpixeled.ankettoplamamerkezi.v1.model.Anketor;
-import com.bitpixeled.ankettoplamamerkezi.v1.repository.AnketorRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bitpixeled.ankettoplamamerkezi.v1.dto.AnketorDto;
+import com.bitpixeled.ankettoplamamerkezi.v1.service.AnketorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/anketorler")
 public class AnketorController {
 
-    private final AnketorRepo anketorRepo;
+    private final AnketorService anketorService;
 
-    public AnketorController(AnketorRepo anketorRepo) {
-        this.anketorRepo = anketorRepo;
+    public AnketorController(AnketorService anketorService) {
+        this.anketorService = anketorService;
     }
 
-    @PostMapping()
+    @GetMapping
+    public List<AnketorDto> findAll() {
+        return anketorService.findAll();
+    }
+
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Anketor addAnketor (@RequestBody Anketor anketor){
-        return anketorRepo.save(anketor);
+    public AnketorDto addAnketor(@RequestBody AnketorDto anket) {
+        return anketorService.addAnketor(anket);
     }
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Anketor getAnketorById (@PathVariable Long id){
-        return anketorRepo.findById(id).orElseThrow(RecordNotFound::new);
+    public AnketorDto findAnketorById(@PathVariable Long id) {
+        return anketorService.findAnketorById(id);
     }
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Anketor updateAnketorById (@PathVariable Long id, @RequestBody Anketor anketor){
-            Anketor entity = anketorRepo.findById(id).orElseThrow(RecordNotFound::new);
-            entity.setName(anketor.getName());
-            entity.setLastName(anketor.getLastName());
-            return anketorRepo.save(entity);
+    public AnketorDto updateAnketorById(@PathVariable Long id, @RequestBody AnketorDto anket) {
+        return anketorService.updateAnketorById(id, anket);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAnketorById(@PathVariable Long id){
-        anketorRepo.deleteById(id);
+    public void deleteAnketorById(@PathVariable Long id) {
+        anketorService.deleteAnketorById(id);
     }
 }

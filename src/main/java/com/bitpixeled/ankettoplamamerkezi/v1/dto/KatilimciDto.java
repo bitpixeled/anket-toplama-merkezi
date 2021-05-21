@@ -1,11 +1,16 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.dto;
 
 import com.bitpixeled.ankettoplamamerkezi.v1.model.Gender;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
 public class KatilimciDto {
 
+    private Long id;
     private String name;
     private String lastName;
     private Gender gender;

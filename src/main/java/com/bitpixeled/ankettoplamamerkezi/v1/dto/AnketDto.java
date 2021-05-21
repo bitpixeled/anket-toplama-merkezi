@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AnketDto {
 
-    private Long anketId;
+    private Long Id;
     private String anketName;
     private List<SoruDto> sorular;
 

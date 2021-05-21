@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class SoruDto {
 
-    private Long soruId;
+    private Long Id;
     private String soru;
+    private boolean isNumericAnswerExpected;
 
 }

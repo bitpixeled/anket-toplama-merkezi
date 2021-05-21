@@ -1,27 +1,41 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.model;
 
-import com.bitpixeled.ankettoplamamerkezi.v1.dto.SoruDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Soru {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long soruId;
+    private Long Id;
     private String soru;
+    private boolean isNumericAnswerExpected;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "anket", referencedColumnName = "anketId")
+    @JoinColumn(name = "AnketId", referencedColumnName = "Id")
     private Anket anket;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Soru soru = (Soru) o;
+        return Id.equals(soru.Id);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id);
+    }
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AnketorDto {
 
-
+    private Long Id;
     private String name;
     private String lastName;
 

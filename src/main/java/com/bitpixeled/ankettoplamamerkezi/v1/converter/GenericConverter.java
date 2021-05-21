@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public interface GenericConverter <E, D> {
     E fromDto(D dto);
     D fromEntity(E entity);
-//    E updateEntity(E entity, D dto);
+    E updateEntity(E entity, D dto);
     default List<D> createFromEntities(final Collection<E> entities) {
         return entities.stream()
                 .map(this::fromEntity)

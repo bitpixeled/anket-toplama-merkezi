@@ -1,6 +1,7 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.service;
 
 import com.bitpixeled.ankettoplamamerkezi.v1.converter.AnketConverter;
+import com.bitpixeled.ankettoplamamerkezi.v1.converter.SoruConverter;
 import com.bitpixeled.ankettoplamamerkezi.v1.dto.AnketDto;
 import com.bitpixeled.ankettoplamamerkezi.v1.exception.RecordNotFound;
 import com.bitpixeled.ankettoplamamerkezi.v1.model.Anket;
@@ -19,11 +20,14 @@ public class AnketService {
 
     private final AnketRepo anketRepo;
     private final AnketConverter anketConverter;
+    private final SoruRepo soruRepo;
+    private final SoruConverter soruConverter;
 
-    public AnketService(AnketRepo anketRepo, AnketConverter anketConverter) {
+    public AnketService(AnketRepo anketRepo, AnketConverter anketConverter, SoruRepo soruRepo, SoruConverter soruConverter) {
         this.anketRepo = anketRepo;
-
         this.anketConverter = anketConverter;
+        this.soruRepo = soruRepo;
+        this.soruConverter = soruConverter;
     }
 
     public List<AnketDto> findAll (){
@@ -31,6 +35,7 @@ public class AnketService {
     }
 
     public AnketDto addAnket(AnketDto anketDto){
+//        anketDto.getSorular().forEach((e) -> soruRepo.save(soruConverter.fromDto(e)));
         return anketConverter.fromEntity(anketRepo.save(anketConverter.fromDto(anketDto)));
     }
 
@@ -42,11 +47,11 @@ public class AnketService {
 
     public AnketDto updateAnketById(Long id, AnketDto anketDto){
         Anket anket = anketRepo.findById(id).orElseThrow(RecordNotFound::new);
-        return anketConverter.fromEntity(anketRepo.save(anketConverter.fromDto(anketDto)));
+        return anketConverter.fromEntity(anketRepo.save(anketConverter.updateEntity(anket, anketDto)));
     }
 
     public void deleteAnketById(Long id){
-        anketRepo.deleteById(id);
+        anketRepo.findById(id).ifPresentOrElse(anketRepo::delete, RecordNotFound::new);
     }
 
 //    public Anket createWithDto (AnketDto anketDto){
