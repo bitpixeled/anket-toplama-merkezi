@@ -25,6 +25,7 @@ public class SoruConverter implements GenericConverter <Soru, SoruDto>{
 
     @Override
     public Soru updateEntity(Soru entity, SoruDto dto) {
+        entity.setId(dto.getId()); //TODO this could cause problem
         entity.setSoru(dto.getSoru());
         entity.setNumericAnswerExpected(dto.isNumericAnswerExpected());
         return entity;

@@ -21,5 +21,7 @@ public class Cevap {
     private Anket anket;
     @ManyToOne(fetch = FetchType.LAZY)
     private Katilimci katilimci;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Anketor anketor;
 
 }
