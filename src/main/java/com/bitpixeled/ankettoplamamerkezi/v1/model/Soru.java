@@ -19,7 +19,7 @@ public class Soru {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String soru;
-    private boolean isNumericAnswerExpected;
+    private boolean numeric;
 
 //    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

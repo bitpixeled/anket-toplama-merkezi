@@ -20,7 +20,7 @@ public class SoruConverter implements GenericConverter <Soru, SoruDto>{
         Soru entity = new Soru();
         entity.setId(dto.getId());
         entity.setSoru(dto.getSoru());
-        entity.setNumericAnswerExpected(dto.isNumericAnswerExpected());
+        entity.setNumeric(dto.isNumeric());
         entity.setAnket(anketRepo.findById(dto.getAnketId()).orElseThrow(()-> new RecordNotFound("Anket bulunamadı")));
         return entity;
     }
@@ -30,7 +30,7 @@ public class SoruConverter implements GenericConverter <Soru, SoruDto>{
         SoruDto dto = new SoruDto();
         dto.setId(entity.getId());
         dto.setSoru(entity.getSoru());
-        dto.setNumericAnswerExpected(entity.isNumericAnswerExpected());
+        dto.setNumeric(entity.isNumeric());
         dto.setAnketId(entity.getAnket().getId());
         return dto;
     }
@@ -39,7 +39,7 @@ public class SoruConverter implements GenericConverter <Soru, SoruDto>{
     public Soru updateEntity(Soru entity, SoruDto dto) {
         entity.setId(dto.getId());
         entity.setSoru(dto.getSoru());
-        entity.setNumericAnswerExpected(dto.isNumericAnswerExpected());
+        entity.setNumeric(dto.isNumeric());
         entity.setAnket(anketRepo.findById(dto.getAnketId()).orElseThrow(()-> new RecordNotFound("Anket bulunamadı")));
         return entity;
     }

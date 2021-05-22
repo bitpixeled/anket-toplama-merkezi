@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/cevaplar")
 public class CevapController {
 
-    private CevapService cevapService;
+    private final CevapService cevapService;
 
     public CevapController(CevapService cevapService) {
         this.cevapService = cevapService;
