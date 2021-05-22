@@ -27,6 +27,7 @@ public class CevapConverter implements GenericConverter <Cevap, CevapDto>{
     @Override
     public Cevap fromDto(CevapDto dto) {
         Cevap entity = new Cevap();
+        entity.setId(dto.getId());
         entity.setCevap(dto.getCevap());
         entity.setSoru(soruRepo.findById(dto.getSoruId()).orElseThrow(()-> new RecordNotFound("Soru bulunamadı")));
         entity.setAnket(anketRepo.findById(dto.getAnketId()).orElseThrow(()-> new RecordNotFound("Anket bulunamadı")));

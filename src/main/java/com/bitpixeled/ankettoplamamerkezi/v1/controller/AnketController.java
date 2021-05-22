@@ -1,7 +1,6 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.controller;
 
 import com.bitpixeled.ankettoplamamerkezi.v1.dto.AnketDto;
-import com.bitpixeled.ankettoplamamerkezi.v1.model.Anket;
 import com.bitpixeled.ankettoplamamerkezi.v1.service.AnketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -46,10 +45,5 @@ public class AnketController {
     public void deleteAnketById(@PathVariable Long id){
         anketService.deleteAnketById(id);
     }
-
-//    @PostMapping(value = "/full")
-//    public Anket createWithDto(@RequestBody AnketDto anketDto){
-//        return anketService.createWithDto(anketDto);
-//    }
 
 }

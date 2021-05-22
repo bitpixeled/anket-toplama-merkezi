@@ -37,7 +37,7 @@ public class SoruConverter implements GenericConverter <Soru, SoruDto>{
 
     @Override
     public Soru updateEntity(Soru entity, SoruDto dto) {
-        entity.setId(dto.getId()); //TODO this could cause problem
+        entity.setId(dto.getId());
         entity.setSoru(dto.getSoru());
         entity.setNumericAnswerExpected(dto.isNumericAnswerExpected());
         entity.setAnket(anketRepo.findById(dto.getAnketId()).orElseThrow(()-> new RecordNotFound("Anket bulunamadı")));

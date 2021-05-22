@@ -25,7 +25,6 @@ public class AnketorService {
     }
 
     public AnketorDto addAnketor(AnketorDto anket) {
-        //TODO - id passed by dto to generated id could cause problem
         return anketorConverter.fromEntity(anketorRepo.save(anketorConverter.fromDto(anket)));
     }
 
@@ -35,7 +34,6 @@ public class AnketorService {
     }
 
     public AnketorDto updateAnketorById(Long id, AnketorDto dto) {
-        //TODO - id passed by dto to generated id could cause problem
         Anketor entity = anketorConverter.fromDto(findAnketorById(id));
         return anketorConverter.fromEntity(anketorRepo.save(anketorConverter.updateEntity(entity, dto)));
     }

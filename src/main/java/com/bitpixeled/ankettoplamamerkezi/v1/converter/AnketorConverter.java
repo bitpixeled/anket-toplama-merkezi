@@ -26,7 +26,7 @@ public class AnketorConverter implements GenericConverter <Anketor, AnketorDto>{
 
     @Override
     public Anketor updateEntity(Anketor entity, AnketorDto dto) {
-        entity.setId(dto.getId()); //TODO check if ids match
+        entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setLastName(dto.getLastName());
         return entity;
