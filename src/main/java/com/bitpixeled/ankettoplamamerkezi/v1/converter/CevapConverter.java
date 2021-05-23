@@ -2,7 +2,10 @@ package com.bitpixeled.ankettoplamamerkezi.v1.converter;
 
 import com.bitpixeled.ankettoplamamerkezi.v1.dto.CevapDto;
 import com.bitpixeled.ankettoplamamerkezi.v1.exception.RecordNotFound;
+import com.bitpixeled.ankettoplamamerkezi.v1.exception.OutOfRange;
+import com.bitpixeled.ankettoplamamerkezi.v1.exception.UnexpectedValue;
 import com.bitpixeled.ankettoplamamerkezi.v1.model.Cevap;
+import com.bitpixeled.ankettoplamamerkezi.v1.model.Soru;
 import com.bitpixeled.ankettoplamamerkezi.v1.repository.AnketRepo;
 import com.bitpixeled.ankettoplamamerkezi.v1.repository.AnketorRepo;
 import com.bitpixeled.ankettoplamamerkezi.v1.repository.KatilimciRepo;
@@ -26,6 +29,10 @@ public class CevapConverter implements GenericConverter <Cevap, CevapDto>{
 
     @Override
     public Cevap fromDto(CevapDto dto) {
+        Soru soru = soruRepo.findById(dto.getSoruId()).orElseThrow(()-> new RecordNotFound("Soru bulunamadı"));
+        if(soru.isNumeric()){
+            validateNumberParsing(dto.getCevap());
+        }
         Cevap entity = new Cevap();
         entity.setId(dto.getId());
         entity.setCevap(dto.getCevap());
@@ -58,4 +65,17 @@ public class CevapConverter implements GenericConverter <Cevap, CevapDto>{
         entity.setAnketor(anketorRepo.findById(dto.getAnketorId()).orElseThrow(()-> new RecordNotFound("Anketör Bulunamadı")));
         return entity;
     }
+
+    public void validateNumberParsing (String s) {
+        try {
+            int cevap = Integer.parseInt(s);
+            if (!(cevap >= 0 && cevap <=10)){
+                throw new OutOfRange(cevap);
+            }
+        } catch (Exception e){
+            throw new UnexpectedValue(s);
+        }
+
+    }
 }
+

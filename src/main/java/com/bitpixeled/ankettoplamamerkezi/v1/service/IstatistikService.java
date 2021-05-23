@@ -32,12 +32,13 @@ public class IstatistikService {
         Anket anket = anketRepo.findById(anketId).orElseThrow(RecordNotFound::new);
         List<Soru> sorular = anket.getSorular();
         Map<Soru, Map<String, Double>> istMap = new HashMap<>();
+
         for (Soru soru : sorular) {
+            Map<String, Double> istatistik = new HashMap<>();
             List<Cevap> cevaplar = cevapRepo.findBySoruId(soru.getId());
             Map<String, Integer> map = new HashMap<>();
             int total = cevaplar.size();
             if(soru.isNumeric()){
-                Map<String, Double> istatistik = new HashMap<>();
                 double toplamDeger = 0;
                 for (Cevap cevap : cevaplar) {
                     int integer = Integer.parseInt(cevap.getCevap());
@@ -45,7 +46,6 @@ public class IstatistikService {
                 }
                 double ortalama = toplamDeger/total*10;
                 istatistik.put(soru.getSoru(), ortalama);
-                istMap.put(soru, istatistik);
             }
             else {
                 for (Cevap cevap : cevaplar) {
@@ -56,12 +56,11 @@ public class IstatistikService {
                         map.put(cevap.getCevap(), 1);
                     }
                 }
-                Map<String, Double> istatistik = new HashMap<>();
                 for (Map.Entry<String, Integer> entry : map.entrySet()) {
                     istatistik.put(entry.getKey(), entry.getValue().doubleValue()/total*100.0);
                 }
-                istMap.put(soru, istatistik);
             }
+            istMap.put(soru, istatistik);
         }
         return istMap;
     }

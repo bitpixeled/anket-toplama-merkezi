@@ -1,11 +1,14 @@
 package com.bitpixeled.ankettoplamamerkezi.v1.converter;
 
 import com.bitpixeled.ankettoplamamerkezi.v1.dto.AnketDto;
+import com.bitpixeled.ankettoplamamerkezi.v1.dto.SoruDto;
 import com.bitpixeled.ankettoplamamerkezi.v1.exception.IdDidNotMatch;
 import com.bitpixeled.ankettoplamamerkezi.v1.exception.RecordNotFound;
 import com.bitpixeled.ankettoplamamerkezi.v1.model.Anket;
 import com.bitpixeled.ankettoplamamerkezi.v1.repository.AnketRepo;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class AnketConverter implements GenericConverter <Anket, AnketDto>{
@@ -24,8 +27,14 @@ public class AnketConverter implements GenericConverter <Anket, AnketDto>{
         Anket entity = new Anket();
         entity.setId(dto.getId());
         entity.setAnketName(dto.getAnketName());
-        anketRepo.save(entity); //
-        entity.setSorular(soruConverter.createFromDtos(dto.getSorular()));
+        //----------
+        Anket saved = anketRepo.save(entity);
+        List<SoruDto> sorular = dto.getSorular();
+        for (SoruDto soruDto : sorular) {
+            soruDto.setAnketId(saved.getId());
+        }
+        //----------
+        entity.setSorular(soruConverter.createFromDtos(sorular));
         return entity;
     }
 
