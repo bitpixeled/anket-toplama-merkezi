@@ -27,13 +27,13 @@ public class Anket {
         this.anketName = name;
     }
 
-    public void addSoru(Soru soru) {
-        sorular.add(soru);
-        soru.setAnket(this);
-    }
-
-    public void removeSoru(Soru soru) {
-        sorular.remove(soru);
-        soru.setAnket(null);
-    }
+//    public void addSoru(Soru soru) {
+//        sorular.add(soru);
+//        soru.setAnket(this);
+//    }
+//
+//    public void removeSoru(Soru soru) {
+//        sorular.remove(soru);
+//        soru.setAnket(null);
+//    }
 }

@@ -69,13 +69,12 @@ public class CevapConverter implements GenericConverter <Cevap, CevapDto>{
     public void validateNumberParsing (String s) {
         try {
             int cevap = Integer.parseInt(s);
-            if (!(cevap >= 0 && cevap <=10)){
+            if (!(cevap > 0 && cevap <=10)){
                 throw new OutOfRange(cevap);
             }
-        } catch (Exception e){
+        } catch (NumberFormatException e){
             throw new UnexpectedValue(s);
         }
-
     }
 }
 
